@@ -1,4 +1,6 @@
-from pydantic import BaseModel, ConfigDict
+from datetime import datetime
+
+from pydantic import BaseModel, ConfigDict, Field
 from pydantic.alias_generators import to_camel
 
 
@@ -62,3 +64,17 @@ class MealPromptResponse(CamelModel):
 class ScreenToPlayRequest(CamelModel):
     age_range: str
     screen_topic: str
+
+
+class ScreenTimeLogRequest(CamelModel):
+    saved_minutes: int = Field(ge=1, le=180)
+
+
+class ScreenTimeLogResponse(CamelModel):
+    id: int
+    saved_minutes: int
+    created_at: datetime
+
+
+class ScreenTimeWeekResponse(CamelModel):
+    saved_minutes_this_week: int

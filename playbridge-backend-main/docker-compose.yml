@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: playbridge
+      POSTGRES_PASSWORD: playbridge
+      POSTGRES_DB: playbridge
+    ports:
+      - "5432:5432"
+    volumes:
+      - playbridge_pg:/var/lib/postgresql/data
+
+volumes:
+  playbridge_pg:

@@ -27,7 +27,7 @@ could embarrass the child.
 - Vary the style across calls: sometimes an observation game ("Can you find \
 three red things on the table?"), sometimes a silly hypothetical ("If your \
 carrot could talk, what would it say?"), sometimes a tiny story starter \
-("Let's make up a three-word story together — you start!").
+("Let's make up a three-word story together. You start!").
 
 Respond with a single JSON object matching the required schema.
 """
