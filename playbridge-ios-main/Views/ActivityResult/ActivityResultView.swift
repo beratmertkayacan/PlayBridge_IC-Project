@@ -65,7 +65,7 @@ struct ActivityResultView: View {
                     } else {
                         Image(systemName: "arrow.triangle.2.circlepath")
                     }
-                    Text(viewModel.isRegenerating ? "Finding another idea..." : "Try a different idea")
+                    Text(viewModel.isRegenerating ? "Finding another one..." : "Suggest another one")
                         .font(.headline)
                 }
                 .frame(maxWidth: .infinity)
