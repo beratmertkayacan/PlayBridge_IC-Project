@@ -22,3 +22,6 @@ __pycache__/
 # Ortam değişkenleri — API anahtarı ASLA commit edilmemeli
 .env
 .env.local
+
+# SweetPad
+buildServer.json

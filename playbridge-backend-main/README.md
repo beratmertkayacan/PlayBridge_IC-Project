@@ -15,6 +15,16 @@ source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+Ekran süresi kaydı için yerel Postgres:
+
+```bash
+docker compose up -d
+```
+
+`.env` içinde `DATABASE_URL` satırı yoksa varsayılan
+`postgresql+psycopg2://playbridge:playbridge@127.0.0.1:5432/playbridge`
+kullanılır. Sunucu açılınca `activity_logs` tablosu kendiliğinden oluşur.
+
 ## Çalıştırma
 
 ```bash
@@ -48,13 +58,16 @@ Ya da tarayıcıdan http://127.0.0.1:8000/docs adresine gidip
 ```
 app/
   main.py                       FastAPI giriş noktası + health check
-  config.py                     .env'den GEMINI_API_KEY okur
+  config.py                     .env'den GEMINI_API_KEY ve DATABASE_URL okur
+  db.py                         SQLAlchemy + Postgres oturumu
   models/
     schemas.py                  Pydantic modelleri (Swift Codable'larla birebir eşleşir)
+    activity_log.py             Ekrandan kurtarılan dakika kaydı
   routers/
     activity.py                 /api/v1/activity/generate   (independent + together)
     screen_to_play.py           /api/v1/screen-to-play/generate
     meal.py                     /api/v1/meal/prompt
+    screen_time.py              /api/v1/screen-time/log ve /this-week
     ai_diagnostics.py           /api/v1/ai/ping (bağlantı testi)
   services/
     ai_client.py                Gemini istemcisi (ping için)
