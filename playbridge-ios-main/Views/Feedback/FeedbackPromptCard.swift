@@ -24,7 +24,7 @@ struct FeedbackPromptCard: View {
                     Text("How did it go?")
                         .font(.headline)
                         .foregroundStyle(Theme.textPrimary)
-                    Text("\"\(entry.activity.title)\" — \(relativePlayedAt)")
+                    Text("\"\(entry.activity.title)\", \(relativePlayedAt)")
                         .font(.subheadline)
                         .foregroundStyle(Theme.textSecondary)
                         .fixedSize(horizontal: false, vertical: true)

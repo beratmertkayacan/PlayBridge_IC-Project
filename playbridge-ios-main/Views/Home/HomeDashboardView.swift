@@ -15,6 +15,13 @@ struct HomeDashboardView: View {
     @State private var path = NavigationPath()
     @State private var showingProfile = false
     @State private var showingLibrary = false
+    @State private var showingDrawGame = false
+
+    // Bandın durumu doğrudan depodan okunuyor. Buraya ayrı bir ViewModel
+    // koymuyoruz: bant yalnızca gösterim yapıyor, asıl oyun mantığı
+    // DrawChallengeView'ın kendi ViewModel'inde duruyor.
+    @State private var drawWeekCount = 0
+    @State private var activeChallengeText: String?
 
     private let columns = [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)]
 
@@ -56,6 +63,16 @@ struct HomeDashboardView: View {
                         }
                         .padding(.horizontal, Theme.screenPadding)
 
+                        DrawGameBanner(
+                            weekCount: drawWeekCount,
+                            weeklyGoal: SketchStore.weeklyGoal,
+                            hasActiveChallenge: activeChallengeText != nil,
+                            activeChallengeText: activeChallengeText
+                        ) {
+                            showingDrawGame = true
+                        }
+                        .padding(.horizontal, Theme.screenPadding)
+
                         Text("Designed to help you leave the screen, not stay on it.")
                             .font(.footnote)
                             .foregroundStyle(Theme.textSecondary)
@@ -67,23 +84,24 @@ struct HomeDashboardView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        showingLibrary = true
-                    } label: {
-                        Image(systemName: "books.vertical")
-                            .foregroundStyle(Theme.primary)
-                    }
-                    .accessibilityLabel("Play Library")
-                }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        showingProfile = true
-                    } label: {
-                        Image(systemName: "person.crop.circle")
-                            .foregroundStyle(Theme.primary)
+                    HStack(spacing: 14) {
+                        Button {
+                            showingLibrary = true
+                        } label: {
+                            Image(systemName: "books.vertical")
+                                .foregroundStyle(Theme.primary)
+                        }
+                        .accessibilityLabel("Play Library")
+
+                        Button {
+                            showingProfile = true
+                        } label: {
+                            Image(systemName: "person.crop.circle")
+                                .foregroundStyle(Theme.primary)
+                        }
+                        .accessibilityLabel("Child Profile")
                     }
-                    .accessibilityLabel("Child Profile")
                 }
             }
             .sheet(isPresented: $showingProfile) {
@@ -91,6 +109,9 @@ struct HomeDashboardView: View {
             }
             .sheet(isPresented: $showingLibrary) {
                 PlayLibraryView()
+            }
+            .sheet(isPresented: $showingDrawGame, onDismiss: refreshDrawGame) {
+                DrawChallengeView(childProfile: childProfile)
             }
             .navigationDestination(for: HomeRoute.self) { route in
                 switch route {
@@ -111,6 +132,7 @@ struct HomeDashboardView: View {
             // Ana ekrana her dönüşte kontrol ediyoruz: ebeveyn bir oyunu
             // yeni işaretlemiş olabilir, ya da uygulamayı yeni açmış olabilir.
             viewModel.refreshPendingFeedback()
+            refreshDrawGame()
         }
     }
 
@@ -118,11 +140,20 @@ struct HomeDashboardView: View {
         HStack(spacing: 8) {
             Image(systemName: "checkmark.circle.fill")
                 .foregroundStyle(Theme.primary)
-            Text("Thanks — that helps.")
+            Text("Thanks, that helps.")
                 .font(.subheadline)
                 .foregroundStyle(Theme.textSecondary)
         }
         .transition(.opacity)
+    }
+
+    /// Banda yansıyan iki bilgi: bu haftaki çizim sayısı ve yarım
+    /// kalmış bir görev olup olmadığı. Ebeveyn görevi başlatıp
+    /// uygulamayı kapatabilir — döndüğünde bandın onu beklediğini
+    /// görmesi gerekiyor.
+    private func refreshDrawGame() {
+        drawWeekCount = SketchStore.currentWeek().count
+        activeChallengeText = ActiveChallengeStore.load()?.challenge.text
     }
 
     private func handleTap(on mode: HomeMode) {

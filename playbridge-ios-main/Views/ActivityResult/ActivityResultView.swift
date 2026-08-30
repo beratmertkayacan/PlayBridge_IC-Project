@@ -43,19 +43,16 @@ struct ActivityResultView: View {
 
     private var actionButtons: some View {
         VStack(spacing: 12) {
-            // ANA AKSİYON: bu aktivite "oynandı" olarak işaretlenir ve
-            // kütüphaneye girer. Kütüphaneye giren tek yol budur.
             PrimaryButton(
-                title: "Put the phone down & play",
-                isEnabled: !viewModel.isRegenerating
+                title: viewModel.isCompleting ? "Saving..." : "Complete Activity",
+                isEnabled: !viewModel.isRegenerating && !viewModel.isCompleting
             ) {
-                viewModel.markAsPlayed()
-                path = NavigationPath()
+                Task {
+                    await viewModel.completeActivity()
+                    path = NavigationPath()
+                }
             }
 
-            // İKİNCİL AKSİYON: beğenilmedi, başka bir fikir gelsin.
-            // Atılan öneri hiçbir yere kaydedilmez — kütüphane bir öneri
-            // çöplüğü değil, gerçekten oynanmış oyunların defteri.
             Button {
                 viewModel.regenerate()
             } label: {
@@ -79,13 +76,12 @@ struct ActivityResultView: View {
                     .strokeBorder(Theme.primary.opacity(0.35), lineWidth: 1)
             )
             .buttonStyle(.plain)
-            .disabled(viewModel.isRegenerating)
+            .disabled(viewModel.isRegenerating || viewModel.isCompleting)
 
-            if viewModel.alternativeCount > 0 {
-                Text("Nothing is saved until you tap play.")
-                    .font(.caption)
-                    .foregroundStyle(Theme.textSecondary)
-            }
+            Text("Saves \(activity.activityTimeMinutes) minutes of screen free play.")
+                .font(.caption)
+                .foregroundStyle(Theme.textSecondary)
+                .frame(maxWidth: .infinity)
         }
         .padding(.top, 8)
     }

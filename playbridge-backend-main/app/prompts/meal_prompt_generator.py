@@ -16,7 +16,7 @@ from app.config import GEMINI_API_KEY
 MODEL_NAME = "gemini-3.6-flash"
 
 SYSTEM_PROMPT = """You generate ONE short, playful conversation-starter or tiny \
-game for a parent to say out loud to their young child during a meal — no \
+game for a parent to say out loud to their child (ages 3-12) during a meal — no \
 screens, no materials, nothing to set up.
 
 Rules:
