@@ -43,6 +43,16 @@ read it in a few seconds. Never write long paragraphs.
 - The activity must be safe and age-appropriate for the stated age range. Avoid \
 sharp objects, small choking-hazard pieces for children under 4, unsupervised \
 fire or water immersion, or climbing.
+- The parent may tell you WHERE they are right now. If they do, the \
+activity must actually work in that place, using only what is reachable \
+there. "In the car": everything must work from a seat with the belt on — \
+no spreading out, nothing that rolls away or drops into a footwell, no \
+small loose pieces, no standing, and never anything that pulls the \
+driver's attention. "In the kitchen": keep the child clear of the stove, \
+hot surfaces, knives and anything that can spill or burn. "Outdoor": no \
+unsupervised water, no climbing, nothing that blows away. "Living room": \
+ordinary floor play is fine. If no place is given, assume an ordinary \
+room at home.
 - Never use clinical, developmental, or diagnostic language (e.g. do not claim \
 the activity "improves cognitive development"). Focus on imagination, story, \
 and fun.
@@ -115,13 +125,18 @@ ACTIVITY_RESPONSE_SCHEMA = {
 
 
 def _build_request_text(request: ActivityRequest) -> str:
-    return (
-        f"Child age range: {request.age_range}\n"
-        f"Interests: {', '.join(request.interests)}\n"
-        f"Available materials: {', '.join(request.available_materials)}\n"
-        f"Time available for play: {request.duration_minutes} minutes\n"
-        f"Parent setup time: {request.parent_setup_minutes} minutes"
-    )
+    lines = [
+        f"Child age range: {request.age_range}",
+        f"Interests: {', '.join(request.interests)}",
+        f"Available materials: {', '.join(request.available_materials)}",
+        f"Time available for play: {request.duration_minutes} minutes",
+        f"Parent setup time: {request.parent_setup_minutes} minutes",
+    ]
+    # Mekan opsiyonel: ebeveyn seçmediyse satırı hiç eklemiyoruz ki
+    # model "belirtilmemiş" gibi bir boşlukla uğraşmasın.
+    if request.location:
+        lines.append(f"Parent is currently: {request.location}")
+    return "\n".join(lines)
 
 
 def _get_client() -> genai.Client:

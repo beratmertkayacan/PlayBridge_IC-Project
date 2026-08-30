@@ -21,6 +21,10 @@ class ActivityRequest(CamelModel):
     duration_minutes: int
     parent_setup_minutes: int
     mode: str
+    # Ebeveynin bulunduğu ortam: "Living room", "In the kitchen",
+    # "In the car", "Outdoor". iOS'ta seçilmesi zorunlu değil, bu yüzden
+    # varsayılanı None — eski istemciler de kırılmadan çalışmaya devam eder.
+    location: str | None = None
 
 
 class PlayActivity(CamelModel):
