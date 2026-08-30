@@ -32,8 +32,28 @@ struct NeedMinutesInputView: View {
                             .foregroundStyle(Theme.textSecondary)
                     }
 
-                    durationSection
-                    setupTimeSection
+                    MinutesInputSection(
+                        title: "How much time do you have?",
+                        options: viewModel.durationOptions,
+                        selected: viewModel.selectedDuration,
+                        extraChip: viewModel.extraDurationChip,
+                        placeholder: "Or type minutes, e.g. 12",
+                        manualInput: $viewModel.manualDurationInput,
+                        canAdd: viewModel.canAddManualDuration,
+                        onSelect: { viewModel.selectDuration($0) },
+                        onAddManual: { viewModel.addManualDuration() }
+                    )
+                    MinutesInputSection(
+                        title: "How much setup time do you have?",
+                        options: viewModel.setupTimeOptions,
+                        selected: viewModel.selectedSetupTime,
+                        extraChip: viewModel.extraSetupChip,
+                        placeholder: "Or type minutes, e.g. 3",
+                        manualInput: $viewModel.manualSetupInput,
+                        canAdd: viewModel.canAddManualSetup,
+                        onSelect: { viewModel.selectSetupTime($0) },
+                        onAddManual: { viewModel.addManualSetup() }
+                    )
                     LocationSection(viewModel: viewModel)
                     MaterialsSection(viewModel: viewModel)
 
@@ -66,41 +86,4 @@ struct NeedMinutesInputView: View {
             }
         }
     }
-
-    private var durationSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("How much time do you have?")
-                .font(.headline)
-                .foregroundStyle(Theme.textPrimary)
-            FlowLayout(spacing: 10) {
-                ForEach(viewModel.durationOptions, id: \.self) { minutes in
-                    SelectableChip(
-                        title: "\(minutes) min",
-                        isSelected: viewModel.selectedDuration == minutes
-                    ) {
-                        viewModel.selectedDuration = minutes
-                    }
-                }
-            }
-        }
-    }
-
-    private var setupTimeSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("How much setup time do you have?")
-                .font(.headline)
-                .foregroundStyle(Theme.textPrimary)
-            FlowLayout(spacing: 10) {
-                ForEach(viewModel.setupTimeOptions, id: \.self) { minutes in
-                    SelectableChip(
-                        title: "\(minutes) min",
-                        isSelected: viewModel.selectedSetupTime == minutes
-                    ) {
-                        viewModel.selectedSetupTime = minutes
-                    }
-                }
-            }
-        }
-    }
-
 }

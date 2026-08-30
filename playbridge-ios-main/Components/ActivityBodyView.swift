@@ -27,10 +27,18 @@ struct ActivityBodyView: View {
                     .foregroundStyle(Theme.textPrimary)
             }
 
-            section(title: "YOU'LL NEED") {
-                FlowLayout(spacing: 10) {
-                    ForEach(activity.materials, id: \.self) { material in
-                        SelectableChip(title: material, isSelected: true) {}
+            if activity.materials.isEmpty {
+                section(title: "YOU'LL NEED") {
+                    Text("Nothing in your hands. Just what you can see from the windows.")
+                        .font(.body)
+                        .foregroundStyle(Theme.textPrimary)
+                }
+            } else {
+                section(title: "YOU'LL NEED") {
+                    FlowLayout(spacing: 10) {
+                        ForEach(activity.materials, id: \.self) { material in
+                            SelectableChip(title: material, isSelected: true) {}
+                        }
                     }
                 }
             }

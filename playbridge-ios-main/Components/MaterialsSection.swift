@@ -31,8 +31,24 @@ struct MaterialsSection: View {
                 .font(.headline)
                 .foregroundStyle(Theme.textPrimary)
 
+            if viewModel.allowsEmptyMaterials {
+                Text("In the car this is optional. Leave it empty for a looking game from the windows, like counting red cars or spotting a truck.")
+                    .font(.subheadline)
+                    .foregroundStyle(Theme.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
             FlowLayout(spacing: 10) {
-                ForEach(options, id: \.self) { material in
+                if viewModel.allowsEmptyMaterials {
+                    SelectableChip(
+                        title: "Nothing in hand",
+                        isSelected: viewModel.nothingInHand
+                    ) {
+                        viewModel.clearMaterials()
+                    }
+                }
+
+                ForEach(viewModel.visibleMaterialChips, id: \.self) { material in
                     SelectableChip(
                         title: material,
                         isSelected: viewModel.selectedMaterials.contains(material)

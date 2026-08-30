@@ -13,8 +13,8 @@ import SwiftUI
 /// bir ebeveynle oturma odasındaki ebeveyn aynı öneriyi alamaz. Arabada
 /// yere yayılan, yuvarlanıp kaçan, masa isteyen hiçbir oyun işe yaramaz.
 ///
-/// Seçim ZORUNLU değil — yorgun bir ebeveyne bir adım daha eklemek
-/// istemiyoruz. Seçilmezse backend eskisi gibi çalışıyor.
+/// Seçim zorunlu değil. Açılır menü yorgun ebeveynin tek dokunuşla
+/// yer seçmesini sağlar; Skip ile boş bırakılabilir.
 struct LocationSection: View {
     @Bindable var viewModel: ActivityGeneratorViewModel
 
@@ -29,16 +29,45 @@ struct LocationSection: View {
                     .foregroundStyle(Theme.textSecondary)
             }
 
-            FlowLayout(spacing: 10) {
+            Menu {
+                Button("Skip for now") {
+                    viewModel.selectLocation(nil)
+                }
                 ForEach(viewModel.locationOptions, id: \.self) { location in
-                    SelectableChip(
-                        title: location,
-                        isSelected: viewModel.selectedLocation == location
-                    ) {
-                        viewModel.toggleLocation(location)
+                    Button(location) {
+                        viewModel.selectLocation(location)
                     }
                 }
+            } label: {
+                HStack(spacing: 10) {
+                    Text(viewModel.selectedLocation ?? "Choose a place")
+                        .font(.body)
+                        .foregroundStyle(
+                            viewModel.selectedLocation == nil
+                                ? Theme.textSecondary
+                                : Theme.textPrimary
+                        )
+                    Spacer()
+                    Image(systemName: "chevron.down")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Theme.textSecondary)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 14)
+                .background(
+                    RoundedRectangle(cornerRadius: Theme.radiusMedium).fill(Color.white)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: Theme.radiusMedium)
+                        .strokeBorder(
+                            viewModel.selectedLocation == nil
+                                ? Theme.textSecondary.opacity(0.15)
+                                : Theme.primary.opacity(0.35),
+                            lineWidth: 1
+                        )
+                )
             }
+            .buttonStyle(.plain)
         }
     }
 }

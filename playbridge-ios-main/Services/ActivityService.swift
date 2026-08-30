@@ -51,6 +51,12 @@ enum ActivityService {
     static func generateMockActivity(for request: ActivityRequest) async -> GeneratedActivityResponse {
         try? await Task.sleep(nanoseconds: 800_000_000)
 
+        if request.mode == "together",
+           request.location == "In the car",
+           request.availableMaterials.isEmpty {
+            return carWindowMock(duration: request.durationMinutes, setup: request.parentSetupMinutes)
+        }
+
         let primaryInterest = request.interests.first ?? "imagination"
         let title = "\(primaryInterest.capitalized) Adventure"
 
@@ -77,6 +83,32 @@ enum ActivityService {
             screenRequired: false
         )
 
+        let safety = SafetyReview(reviewed: true, safe: true, notes: [])
+        return GeneratedActivityResponse(activity: activity, safety: safety)
+    }
+
+    private static func carWindowMock(duration: Int, setup: Int) -> GeneratedActivityResponse {
+        let activity = PlayActivity(
+            id: UUID().uuidString,
+            title: "Red Car Hunt",
+            summary: "A looking game you play from your seats. Nothing in your hands. Just the view out the window.",
+            setupTimeMinutes: setup,
+            activityTimeMinutes: duration,
+            materials: [],
+            setupSteps: [
+                "Stay buckled. Look out the windows together."
+            ],
+            childInstructions: [
+                "Count every red car you see.",
+                "Then switch: find a blue car, then a truck."
+            ],
+            imaginationPrompts: [
+                "Where do you think that red car is going?",
+                "What would a giant truck say if it could talk?",
+                "Can you spot something the same color as your shirt?"
+            ],
+            screenRequired: false
+        )
         let safety = SafetyReview(reviewed: true, safe: true, notes: [])
         return GeneratedActivityResponse(activity: activity, safety: safety)
     }
