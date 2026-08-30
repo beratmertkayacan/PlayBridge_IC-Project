@@ -15,8 +15,8 @@ import Foundation
 ///    ekrana GİTMİYORUZ: ebeveyn
 ///    geri tuşuyla eski önerilere dönmek istemez, tek bir öneri görmek
 ///    ister. Atılan öneri hiçbir yere kaydedilmez.
-/// 2. "Put the phone down & play" — aktiviteyi kütüphaneye "oynandı"
-///    olarak yazar. Kütüphaneye giren tek yol budur.
+/// 2. "Complete Activity" aktiviteyi kütüphaneye "oynandı"
+///    olarak yazar ve süreyi backend'e ekrandan kurtarılan dakika olarak gönderir.
 @MainActor
 @Observable
 final class ActivityResultViewModel {
@@ -24,6 +24,7 @@ final class ActivityResultViewModel {
     let source: ActivitySource
 
     var isRegenerating: Bool = false
+    var isCompleting: Bool = false
 
     /// Kaç kez alternatif istendi — ekranda küçük bir ipucu göstermek için.
     private(set) var alternativeCount: Int = 0
@@ -55,7 +56,15 @@ final class ActivityResultViewModel {
         }
     }
 
-    func markAsPlayed() {
+    func completeActivity() async {
+        guard !isCompleting else { return }
+        isCompleting = true
         PlayLibraryStore.recordPlayed(activity: activity, source: source)
+        do {
+            _ = try await ScreenTimeService.log(savedMinutes: activity.activityTimeMinutes)
+        } catch {
+            print("Ekran süresi kaydı backend'e yazılamadı: \(error)")
+        }
+        isCompleting = false
     }
 }

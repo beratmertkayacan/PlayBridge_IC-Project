@@ -79,6 +79,23 @@ enum PlayLibraryStore {
         UserDefaults.standard.removeObject(forKey: key)
     }
 
+    /// Bu hafta (Pazartesi 00:00 UTC) kütüphaneye giren oyunların toplam süresi.
+    /// Backend ulaşılamazsa kart yine de boş kalmasın diye.
+    static func minutesSavedThisWeek(now: Date = Date()) -> Int {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "UTC") ?? TimeZone(secondsFromGMT: 0)!
+        calendar.firstWeekday = 2
+        let weekday = calendar.component(.weekday, from: now)
+        let daysFromMonday = (weekday + 5) % 7
+        guard let start = calendar.date(byAdding: .day, value: -daysFromMonday, to: now) else {
+            return 0
+        }
+        let weekStart = calendar.startOfDay(for: start)
+        return all()
+            .filter { $0.playedAt >= weekStart }
+            .reduce(0) { $0 + $1.activity.activityTimeMinutes }
+    }
+
     // MARK: - Yardımcılar
 
     private static func update(_ id: String, _ change: (inout PlayedActivity) -> Void) {

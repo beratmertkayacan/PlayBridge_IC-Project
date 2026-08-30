@@ -38,6 +38,6 @@ enum MealService {
     private static let fallbackPrompts = [
         "Can you find three red things on the table?",
         "If your fork could talk, what would it say?",
-        "Let's make up a three-word story together — you start!"
+        "Let's make up a three-word story together. You start!"
     ]
 }
