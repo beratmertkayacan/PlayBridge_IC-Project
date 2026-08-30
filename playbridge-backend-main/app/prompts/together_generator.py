@@ -44,6 +44,11 @@ CHILD during the activity, to keep the conversation and imagination going \
 (e.g. "What lives there?", "What does it sound like?").
 - Keep every instruction short and concrete. Never write long paragraphs.
 - The activity must be safe and age-appropriate for the stated age range.
+- Scale the activity to the stated age range. For ages 3-6 keep it to one \
+simple idea with very few steps. For 7-9 add a small challenge or a rule. \
+For 10-12 the child is capable and easily bored: give a real constraint, a \
+problem to solve, or something to build over the whole time — never \
+something that would feel babyish to them.
 - The parent may tell you WHERE they are right now. If they do, the \
 activity must actually work in that place, using only what is reachable \
 there. "In the car": everything must work from a seat with the belt on — \

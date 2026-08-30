@@ -23,7 +23,7 @@ from app.models.schemas import PlayActivity
 MODEL_NAME = "gemini-3.6-flash"
 
 SAFETY_SYSTEM_PROMPT = """You are a strict child-safety and appropriateness reviewer \
-for PlayBridge AI, an app that suggests short play activities for young children.
+for PlayBridge AI, an app that suggests short play activities for children aged 3-12.
 
 You will be given the child's age range and a play activity (title, materials, \
 setup steps, child instructions, imagination prompts). Check it for ALL of the \
