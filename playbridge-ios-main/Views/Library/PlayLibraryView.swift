@@ -9,10 +9,29 @@ import SwiftUI
 
 /// "Play Library" — ebeveynin gerçekten oynadığı oyunların defteri.
 ///
-/// Buraya sadece "Put the phone down & play" denen aktiviteler giriyor.
+/// Buraya sadece Complete Activity denen aktiviteler giriyor.
 /// Bakılıp geçilen, "Try a different idea" ile atılan öneriler burada yok.
+/// Kütüphanenin iki sekmesi: oynanmış aktiviteler ve çizim defteri.
+/// İkisi de "biriken şeyler" olduğu için aynı ekranda duruyorlar.
+/// Ekrandan kurtarılan süre kartı ikisinin de üstünde — çünkü o toplam
+/// hem aktivitelerden hem çizimlerden besleniyor.
+enum LibraryTab: String, CaseIterable, Identifiable {
+    case activities
+    case sketchbook
+
+    var id: String { rawValue }
+    var title: String {
+        switch self {
+        case .activities: return "Activities"
+        case .sketchbook: return "Sketchbook"
+        }
+    }
+}
+
 struct PlayLibraryView: View {
     @State private var viewModel = PlayLibraryViewModel()
+    @State private var screenTime = ScreenTimeViewModel()
+    @State private var tab: LibraryTab = .activities
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -20,13 +39,34 @@ struct PlayLibraryView: View {
             ZStack {
                 Theme.background.ignoresSafeArea()
 
-                if viewModel.isEmpty {
-                    emptyState
-                } else {
-                    content
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 18) {
+                        ScreenTimeSavedCard(viewModel: screenTime)
+
+                        Picker("", selection: $tab) {
+                            ForEach(LibraryTab.allCases) { option in
+                                Text(option.title).tag(option)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+
+                        switch tab {
+                        case .activities:
+                            if viewModel.isEmpty {
+                                emptyState
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.top, 36)
+                            } else {
+                                libraryContent
+                            }
+                        case .sketchbook:
+                            SketchbookContent()
+                        }
+                    }
+                    .padding(Theme.screenPadding)
                 }
             }
-            .navigationTitle("Play Library")
+            .navigationTitle("Your Library")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -37,54 +77,54 @@ struct PlayLibraryView: View {
                 PlayedActivityDetailView(entry: entry, viewModel: viewModel)
             }
         }
-        .onAppear { viewModel.load() }
+        .onAppear {
+            viewModel.load()
+            screenTime.refresh()
+        }
     }
 
     // MARK: - Dolu hâl
 
-    private var content: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 18) {
-                Text(viewModel.summaryLine)
-                    .font(.subheadline)
-                    .foregroundStyle(Theme.textSecondary)
+    private var libraryContent: some View {
+        VStack(alignment: .leading, spacing: 18) {
+            Text(viewModel.summaryLine)
+                .font(.subheadline)
+                .foregroundStyle(Theme.textSecondary)
 
-                FlowLayout(spacing: 8) {
-                    ForEach(LibraryFilter.allCases) { option in
-                        SelectableChip(
-                            title: option.title,
-                            isSelected: viewModel.filter == option
-                        ) {
-                            viewModel.filter = option
-                        }
+            FlowLayout(spacing: 8) {
+                ForEach(LibraryFilter.allCases) { option in
+                    SelectableChip(
+                        title: option.title,
+                        isSelected: viewModel.filter == option
+                    ) {
+                        viewModel.filter = option
                     }
                 }
+            }
 
-                if viewModel.visibleEntries.isEmpty {
-                    Text("Nothing here yet with this filter.")
-                        .font(.subheadline)
-                        .foregroundStyle(Theme.textSecondary)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.top, 40)
-                } else {
-                    LazyVStack(spacing: 12) {
-                        ForEach(viewModel.visibleEntries) { entry in
-                            NavigationLink(value: entry) {
-                                row(for: entry)
-                            }
-                            .buttonStyle(.plain)
-                            .contextMenu {
-                                Button(role: .destructive) {
-                                    viewModel.delete(entry)
-                                } label: {
-                                    Label("Remove from library", systemImage: "trash")
-                                }
+            if viewModel.visibleEntries.isEmpty {
+                Text("Nothing here yet with this filter.")
+                    .font(.subheadline)
+                    .foregroundStyle(Theme.textSecondary)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.top, 40)
+            } else {
+                LazyVStack(spacing: 12) {
+                    ForEach(viewModel.visibleEntries) { entry in
+                        NavigationLink(value: entry) {
+                            row(for: entry)
+                        }
+                        .buttonStyle(.plain)
+                        .contextMenu {
+                            Button(role: .destructive) {
+                                viewModel.delete(entry)
+                            } label: {
+                                Label("Remove from library", systemImage: "trash")
                             }
                         }
                     }
                 }
             }
-            .padding(Theme.screenPadding)
         }
     }
 
@@ -174,7 +214,7 @@ struct PlayLibraryView: View {
                 .font(.title3.bold())
                 .foregroundStyle(Theme.textPrimary)
 
-            Text("When you tap \"Put the phone down & play\", the activity lands here — so you can play it again without generating anything.")
+            Text("When you tap Complete Activity, the game lands here so you can play it again without generating anything.")
                 .font(.subheadline)
                 .foregroundStyle(Theme.textSecondary)
                 .multilineTextAlignment(.center)

@@ -26,7 +26,10 @@ struct AgeRangeStepView: View {
                 }
                 .multilineTextAlignment(.center)
 
-                HStack(spacing: 12) {
+                // Beş kademe tek satıra sığmıyor; FlowLayout satırları
+                // kendisi sarıyor ve uygulamanın geri kalanıyla aynı
+                // yerleşim davranışını veriyor.
+                FlowLayout(spacing: 12) {
                     ForEach(viewModel.ageRanges, id: \.self) { range in
                         AgeOptionButton(
                             title: range,
@@ -59,8 +62,8 @@ private struct AgeOptionButton: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(.title3.weight(.semibold))
-                .frame(width: 84, height: 84)
+                .font(.headline.weight(.semibold))
+                .frame(width: 76, height: 76)
                 .background(
                     RoundedRectangle(cornerRadius: Theme.radiusMedium)
                         .fill(isSelected ? Theme.primary : Theme.surface)

@@ -15,7 +15,9 @@ final class OnboardingViewModel {
     var isOnboardingComplete: Bool = false
     var completedProfile: ChildProfile? = nil
 
-    let ageRanges = ["3-4", "5-6", "7"]
+    // Yaş 12'ye kadar açık. Çizim oyunu ilkokul sonuna kadar taşıyor;
+    // kademeler yukarı çıktıkça görevler kısıt içeren zorluklara dönüşüyor.
+    let ageRanges = ["3-4", "5-6", "7-8", "9-10", "11-12"]
     let interestOptions = ["Dinosaurs", "Space", "Animals", "Drawing", "Music", "Cars", "Building", "Nature", "Stories"]
     let materialOptions = ["Paper", "Crayons", "Building Blocks", "Toy Animals", "Books", "Pillows", "Ball"]
 

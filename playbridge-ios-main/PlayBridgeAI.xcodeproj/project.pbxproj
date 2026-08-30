@@ -58,6 +58,24 @@
 		AA200000000000000000000C /* RemovableChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000000C /* RemovableChip.swift */; };
 		AA200000000000000000000D /* MaterialsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000000D /* MaterialsSection.swift */; };
 		AA200000000000000000000E /* LocationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000000E /* LocationSection.swift */; };
+		AA200000000000000000000F /* ScreenTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000000F /* ScreenTime.swift */; };
+		AA2000000000000000000010 /* ScreenTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000010 /* ScreenTimeService.swift */; };
+		AA2000000000000000000011 /* ScreenTimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000011 /* ScreenTimeViewModel.swift */; };
+		AA2000000000000000000012 /* ScreenTimeSavedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000012 /* ScreenTimeSavedCard.swift */; };
+		BB2000000000000000000001 /* DrawingChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1000000000000000000001 /* DrawingChallenge.swift */; };
+		BB2000000000000000000002 /* SketchEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1000000000000000000002 /* SketchEntry.swift */; };
+		BB2000000000000000000003 /* SketchBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1000000000000000000003 /* SketchBadge.swift */; };
+		BB2000000000000000000004 /* ChallengeLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1000000000000000000004 /* ChallengeLibrary.swift */; };
+		BB2000000000000000000005 /* SketchPhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1000000000000000000005 /* SketchPhotoStore.swift */; };
+		BB2000000000000000000006 /* SketchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1000000000000000000006 /* SketchStore.swift */; };
+		BB2000000000000000000007 /* ActiveChallengeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1000000000000000000007 /* ActiveChallengeStore.swift */; };
+		BB2000000000000000000008 /* DrawGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1000000000000000000008 /* DrawGameViewModel.swift */; };
+		BB2000000000000000000009 /* BadgeStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1000000000000000000009 /* BadgeStamp.swift */; };
+		BB200000000000000000000A /* DrawGameBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB100000000000000000000A /* DrawGameBanner.swift */; };
+		BB200000000000000000000B /* DrawChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB100000000000000000000B /* DrawChallengeView.swift */; };
+		BB200000000000000000000C /* BadgeMomentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB100000000000000000000C /* BadgeMomentView.swift */; };
+		BB200000000000000000000D /* SketchbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB100000000000000000000D /* SketchbookView.swift */; };
+		BB200000000000000000000E /* SketchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB100000000000000000000E /* SketchDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +150,24 @@
 		AA100000000000000000000C /* RemovableChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovableChip.swift; sourceTree = "<group>"; };
 		AA100000000000000000000D /* MaterialsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialsSection.swift; sourceTree = "<group>"; };
 		AA100000000000000000000E /* LocationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSection.swift; sourceTree = "<group>"; };
+		AA100000000000000000000F /* ScreenTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTime.swift; sourceTree = "<group>"; };
+		AA1000000000000000000010 /* ScreenTimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTimeService.swift; sourceTree = "<group>"; };
+		AA1000000000000000000011 /* ScreenTimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTimeViewModel.swift; sourceTree = "<group>"; };
+		AA1000000000000000000012 /* ScreenTimeSavedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTimeSavedCard.swift; sourceTree = "<group>"; };
+		BB1000000000000000000001 /* DrawingChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingChallenge.swift; sourceTree = "<group>"; };
+		BB1000000000000000000002 /* SketchEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchEntry.swift; sourceTree = "<group>"; };
+		BB1000000000000000000003 /* SketchBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchBadge.swift; sourceTree = "<group>"; };
+		BB1000000000000000000004 /* ChallengeLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeLibrary.swift; sourceTree = "<group>"; };
+		BB1000000000000000000005 /* SketchPhotoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchPhotoStore.swift; sourceTree = "<group>"; };
+		BB1000000000000000000006 /* SketchStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchStore.swift; sourceTree = "<group>"; };
+		BB1000000000000000000007 /* ActiveChallengeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveChallengeStore.swift; sourceTree = "<group>"; };
+		BB1000000000000000000008 /* DrawGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawGameViewModel.swift; sourceTree = "<group>"; };
+		BB1000000000000000000009 /* BadgeStamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeStamp.swift; sourceTree = "<group>"; };
+		BB100000000000000000000A /* DrawGameBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawGameBanner.swift; sourceTree = "<group>"; };
+		BB100000000000000000000B /* DrawChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawChallengeView.swift; sourceTree = "<group>"; };
+		BB100000000000000000000C /* BadgeMomentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeMomentView.swift; sourceTree = "<group>"; };
+		BB100000000000000000000D /* SketchbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchbookView.swift; sourceTree = "<group>"; };
+		BB100000000000000000000E /* SketchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -180,6 +216,7 @@
 		ABE3A2A23043006700DA510F = {
 			isa = PBXGroup;
 			children = (
+				BB1000000000000000000C00 /* Content */,
 				ABE3A2AD3043006800DA510F /* PlayBridgeAI */,
 				ABE3A2BB3043006900DA510F /* PlayBridgeAITests */,
 				ABE3A2C53043006900DA510F /* PlayBridgeAIUITests */,
@@ -208,6 +245,10 @@
 		ABE3A2D7304301AE00DA510F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BB1000000000000000000001 /* DrawingChallenge.swift */,
+				BB1000000000000000000002 /* SketchEntry.swift */,
+				BB1000000000000000000003 /* SketchBadge.swift */,
+				AA100000000000000000000F /* ScreenTime.swift */,
 				AA1000000000000000000001 /* ActivityFeedback.swift */,
 				AA1000000000000000000002 /* PlayedActivity.swift */,
 				ABE3A31F304337E900DA510F /* ScreenToPlay.swift */,
@@ -224,6 +265,7 @@
 		ABE3A2D8304301BB00DA510F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BB1000000000000000000D00 /* DrawGame */,
 				AA10000000000000000000B1 /* Library */,
 				AA10000000000000000000F1 /* Feedback */,
 				ABE3A32730434EFC00DA510F /* TogetherMode */,
@@ -302,6 +344,8 @@
 		ABE3A2E03043021000DA510F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				BB1000000000000000000008 /* DrawGameViewModel.swift */,
+				AA1000000000000000000011 /* ScreenTimeViewModel.swift */,
 				AA1000000000000000000005 /* PlayLibraryViewModel.swift */,
 				AA1000000000000000000006 /* ActivityResultViewModel.swift */,
 				ABE3A3233043380900DA510F /* ScreenToPlayViewModel.swift */,
@@ -316,6 +360,7 @@
 		ABE3A2E23043022100DA510F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				AA1000000000000000000010 /* ScreenTimeService.swift */,
 				ABE3A321304337FB00DA510F /* ScreenToPlayService.swift */,
 				ABE3A3193043353D00DA510F /* MealService.swift */,
 				ABE3A30F3043165400DA510F /* ActivityService.swift */,
@@ -335,6 +380,9 @@
 		ABE3A2E43043023500DA510F /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				BB1000000000000000000005 /* SketchPhotoStore.swift */,
+				BB1000000000000000000006 /* SketchStore.swift */,
+				BB1000000000000000000007 /* ActiveChallengeStore.swift */,
 				AA1000000000000000000003 /* PlayLibraryStore.swift */,
 				AA1000000000000000000004 /* AppSession.swift */,
 				ABE3A33030435A4400DA510F /* ProfileStore.swift */,
@@ -345,6 +393,9 @@
 		ABE3A2E53043024000DA510F /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				BB1000000000000000000009 /* BadgeStamp.swift */,
+				BB100000000000000000000A /* DrawGameBanner.swift */,
+				AA1000000000000000000012 /* ScreenTimeSavedCard.swift */,
 				AA100000000000000000000C /* RemovableChip.swift */,
 				AA100000000000000000000D /* MaterialsSection.swift */,
 				AA100000000000000000000E /* LocationSection.swift */,
@@ -390,6 +441,25 @@
 				AA100000000000000000000B /* PlayedActivityDetailView.swift */,
 			);
 			path = Library;
+			sourceTree = "<group>";
+		};
+		BB1000000000000000000C00 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				BB1000000000000000000004 /* ChallengeLibrary.swift */,
+			);
+			path = Content;
+			sourceTree = "<group>";
+		};
+		BB1000000000000000000D00 /* DrawGame */ = {
+			isa = PBXGroup;
+			children = (
+				BB100000000000000000000B /* DrawChallengeView.swift */,
+				BB100000000000000000000C /* BadgeMomentView.swift */,
+				BB100000000000000000000D /* SketchbookView.swift */,
+				BB100000000000000000000E /* SketchDetailView.swift */,
+			);
+			path = DrawGame;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -536,9 +606,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB2000000000000000000001 /* DrawingChallenge.swift in Sources */,
+				BB2000000000000000000002 /* SketchEntry.swift in Sources */,
+				BB2000000000000000000003 /* SketchBadge.swift in Sources */,
+				BB2000000000000000000004 /* ChallengeLibrary.swift in Sources */,
+				BB2000000000000000000005 /* SketchPhotoStore.swift in Sources */,
+				BB2000000000000000000006 /* SketchStore.swift in Sources */,
+				BB2000000000000000000007 /* ActiveChallengeStore.swift in Sources */,
+				BB2000000000000000000008 /* DrawGameViewModel.swift in Sources */,
+				BB2000000000000000000009 /* BadgeStamp.swift in Sources */,
+				BB200000000000000000000A /* DrawGameBanner.swift in Sources */,
+				BB200000000000000000000B /* DrawChallengeView.swift in Sources */,
+				BB200000000000000000000C /* BadgeMomentView.swift in Sources */,
+				BB200000000000000000000D /* SketchbookView.swift in Sources */,
+				BB200000000000000000000E /* SketchDetailView.swift in Sources */,
 				AA200000000000000000000C /* RemovableChip.swift in Sources */,
 				AA200000000000000000000D /* MaterialsSection.swift in Sources */,
 				AA200000000000000000000E /* LocationSection.swift in Sources */,
+				AA200000000000000000000F /* ScreenTime.swift in Sources */,
+				AA2000000000000000000010 /* ScreenTimeService.swift in Sources */,
+				AA2000000000000000000011 /* ScreenTimeViewModel.swift in Sources */,
+				AA2000000000000000000012 /* ScreenTimeSavedCard.swift in Sources */,
 				AA2000000000000000000001 /* ActivityFeedback.swift in Sources */,
 				AA2000000000000000000002 /* PlayedActivity.swift in Sources */,
 				AA2000000000000000000003 /* PlayLibraryStore.swift in Sources */,
