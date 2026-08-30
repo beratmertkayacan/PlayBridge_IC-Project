@@ -8,7 +8,7 @@
 import Foundation
 
 struct ChildProfile: Codable, Equatable {
-    var ageRange: String              // "3-4", "5-6", "7"
+    var ageRange: String              // "5-6", "7-8", "9-10", "11-12"
     var interests: [String]           // örn. ["dinosaurs", "space"]
     var availableMaterials: [String]  // örn. ["paper", "crayons"]
     var preferredActivityDuration: Int // dakika, örn. 15
