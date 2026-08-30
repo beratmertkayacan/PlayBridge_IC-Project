@@ -19,10 +19,10 @@ import uuid
 from google import genai
 from google.genai import types
 
-from app.config import GEMINI_API_KEY
+from app.config import GEMINI_API_KEY, GEMINI_MODEL
 from app.models.schemas import ActivityRequest, PlayActivity
 
-MODEL_NAME = "gemini-3.6-flash"
+MODEL_NAME = GEMINI_MODEL
 
 SYSTEM_PROMPT = """You are a creative assistant embedded in PlayBridge AI. \
 Unlike the "independent play" mode, this activity is for a PARENT WHO WANTS \
@@ -51,10 +51,20 @@ problem to solve, or something to build over the whole time — never \
 something that would feel babyish to them.
 - The parent may tell you WHERE they are right now. If they do, the \
 activity must actually work in that place, using only what is reachable \
-there. "In the car": everything must work from a seat with the belt on — \
-no spreading out, nothing that rolls away or drops into a footwell, no \
+there. "In the car": everything must work from a seat with the belt on. \
+No spreading out, nothing that rolls away or drops into a footwell, no \
 small loose pieces, no standing, and never anything that pulls the \
-driver's attention. "In the kitchen": keep the child clear of the stove, \
+driver's attention. If they are In the car AND the materials list is \
+empty (nothing in hand), do NOT invent toys or paper. Generate a \
+LOOKING, COUNTING, or GUESSING game that uses only what can be seen \
+through the windows: spotting colors, counting cars, finding a truck, \
+I spy, license-plate letters, or similar. Vary the target each time. \
+Use the child's interests when they fit the view (for example a child \
+who loves dinosaurs might look for a truck that looks like one). \
+"materials" must be an empty list. "setupSteps" should be one line \
+such as staying buckled and looking out the windows together. The \
+parent can play with their voice; the child does the looking. \
+"In the kitchen": keep the child clear of the stove, \
 hot surfaces, knives and anything that can spill or burn. "Outdoor": no \
 unsupervised water, no climbing, nothing that blows away. "Living room": \
 ordinary floor play is fine. If no place is given, assume an ordinary \
@@ -90,7 +100,7 @@ ACTIVITY_RESPONSE_SCHEMA = {
         "materials": {
             "type": "array",
             "items": {"type": "string"},
-            "description": "Only materials from the ones the parent said they have.",
+            "description": "Only materials from the ones the parent said they have. Empty list if they have nothing in hand (car window games).",
         },
         "setupSteps": {
             "type": "array",
@@ -131,14 +141,30 @@ def _get_client() -> genai.Client:
 
 
 def _build_request_text(request: ActivityRequest) -> str:
+    materials = request.available_materials
+    if materials:
+        materials_line = f"Available materials: {', '.join(materials)}"
+    else:
+        materials_line = (
+            "Available materials: none. The child has nothing in their hands."
+        )
+
     lines = [
         f"Child age range: {request.age_range}",
         f"Interests: {', '.join(request.interests)}",
-        f"Available materials: {', '.join(request.available_materials)}",
+        materials_line,
         f"Time available together: {request.duration_minutes} minutes",
     ]
     if request.location:
         lines.append(f"Parent is currently: {request.location}")
+        if request.location == "In the car" and not materials:
+            lines.append(
+                "IMPORTANT: This must be a looking, counting, or guessing game "
+                "from the car windows only. Examples of the STYLE (do not copy "
+                "these every time): count red cars, count blue cars, spot a "
+                "truck, I spy a color, find a bus. No toys, no paper, no "
+                "physical props. materials must be []."
+            )
     return "\n".join(lines)
 
 

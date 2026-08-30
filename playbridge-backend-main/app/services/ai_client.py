@@ -1,9 +1,9 @@
 from google import genai
 
-from app.config import GEMINI_API_KEY
+from app.config import GEMINI_API_KEY, GEMINI_MODEL
 
 # Ücretsiz katmanda (günde 1.500 istek, kredi kartı gerektirmez) mevcut model.
-MODEL_NAME = "gemini-3.6-flash"
+MODEL_NAME = GEMINI_MODEL
 
 
 def _get_client() -> genai.Client:

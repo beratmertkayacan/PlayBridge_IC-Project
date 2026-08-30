@@ -20,11 +20,16 @@ router = APIRouter(prefix="/api/v1/activity", tags=["activity"])
 
 def generate_mock_activity(request: ActivityRequest) -> GeneratedActivityResponse:
     """
-    Phase 8'den kalma, elle yazılmış ve bilinen güvenli mock. İki durumda
-    devreye giriyor: (1) AI çağrısı herhangi bir nedenle başarısız olursa,
-    (2) AI'ın ürettiği aktivite güvenlik incelemesinden iki denemede de
-    geçemezse — risk almak yerine buna düşüyoruz.
+    Elle yazılmış, bilinen güvenli mock. AI çağrısı düşerse veya güvenlik
+    incelemesi iki denemede de geçemezse buraya düşülür.
     """
+    if (
+        request.mode == "together"
+        and request.location == "In the car"
+        and not request.available_materials
+    ):
+        return _car_window_mock(request)
+
     primary_interest = request.interests[0] if request.interests else "imagination"
     title = f"{primary_interest.capitalize()} Adventure"
 
@@ -51,6 +56,32 @@ def generate_mock_activity(request: ActivityRequest) -> GeneratedActivityRespons
         screen_required=False,
     )
 
+    safety = SafetyReview(reviewed=True, safe=True, notes=[])
+    return GeneratedActivityResponse(activity=activity, safety=safety)
+
+
+def _car_window_mock(request: ActivityRequest) -> GeneratedActivityResponse:
+    activity = PlayActivity(
+        id=str(uuid.uuid4()),
+        title="Red Car Hunt",
+        summary="A looking game you play from your seats. Nothing in your hands. Just the view out the window.",
+        setup_time_minutes=request.parent_setup_minutes,
+        activity_time_minutes=request.duration_minutes,
+        materials=[],
+        setup_steps=[
+            "Stay buckled. Look out the windows together.",
+        ],
+        child_instructions=[
+            "Count every red car you see.",
+            "Then switch: find a blue car, then a truck.",
+        ],
+        imagination_prompts=[
+            "Where do you think that red car is going?",
+            "What would a giant truck say if it could talk?",
+            "Can you spot something the same color as your shirt?",
+        ],
+        screen_required=False,
+    )
     safety = SafetyReview(reviewed=True, safe=True, notes=[])
     return GeneratedActivityResponse(activity=activity, safety=safety)
 

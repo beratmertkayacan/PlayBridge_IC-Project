@@ -118,8 +118,11 @@ JSON'u doğrudan çözebiliyor.
 Claude'un kalıcı/kredi kartsız bir ücretsiz katmanı yok — hesap
 bakiyesi gerektiriyor. Hackathon bütçesi için bunu Google Gemini API
 ile değiştirdik: Google AI Studio üzerinden, kredi kartı istemeden,
-süresiz bir ücretsiz katman sunuyor (Flash modelinde günde 1.500
-istek). Bu pivot'u raporunuzdaki "karşılaştığınız zorluklar" kısmına
+süresiz bir ücretsiz katman sunuyor. **Ama limit sandığınızdan küçük:**
+ücretsiz katmanda kota PROJE ve MODEL başına ayrı sayılıyor ve bu
+modellerde günde 20 istek. Kota dolunca `429 RESOURCE_EXHAUSTED`
+alırsınız; `.env` içindeki `GEMINI_MODEL` satırını başka bir modele
+çevirmek taze bir kota açar (bkz. "Model ve kota" bölümü). Bu pivot'u raporunuzdaki "karşılaştığınız zorluklar" kısmına
 yazabilirsiniz — gerçek bir mühendislik kararı.
 
 1. https://aistudio.google.com/apikey adresine gidip Google
@@ -201,6 +204,29 @@ Test etmek için `/docs`'tan `/api/v1/activity/generate`'i tekrar
 deneyin — terminaldeki log'da artık `INFO: Gemini'den gerçek,
 güvenlik onaylı aktivite üretildi: ...` satırını görmelisiniz
 (önceden INFO satırları görünmüyordu, main.py'de bunu da düzelttik).
+
+## Model ve kota
+
+Ücretsiz katmanda limit **proje × model** başına: bu modellerde günde
+20 istek (`GenerateRequestsPerDayPerProjectPerModel-FreeTier`). Aynı
+projede yeni bir API anahtarı üretmek kotayı **açmaz** — kota anahtara
+değil projeye bağlı.
+
+Model adı koda gömülü değil, `.env`'den geliyor:
+
+```
+GEMINI_MODEL=gemini-3.5-flash
+GEMINI_REVIEW_MODEL=gemini-3.5-flash-lite
+```
+
+Üretim ve güvenlik incelemesi **bilerek farklı modeller** kullanıyor:
+her aktivite iki çağrı yapıyor ve bu ikisi ayrı kotalardan yediği için
+günlük kapasite pratikte ikiye katlanıyor.
+
+Kota dolduğunda kod değiştirmeye gerek yok — `.env`'de modeli değiştirip
+sunucuyu yeniden başlatın. Çalıştığı doğrulanan alternatifler:
+`gemini-3.5-flash`, `gemini-3.6-flash`, `gemini-3.1-flash-lite`,
+`gemini-flash-lite-latest`, `gemini-3.5-flash-lite`.
 
 ## Sırada ne var?
 

@@ -17,10 +17,10 @@ import json
 from google import genai
 from google.genai import types
 
-from app.config import GEMINI_API_KEY
+from app.config import GEMINI_API_KEY, GEMINI_REVIEW_MODEL
 from app.models.schemas import PlayActivity
 
-MODEL_NAME = "gemini-3.6-flash"
+MODEL_NAME = GEMINI_REVIEW_MODEL
 
 SAFETY_SYSTEM_PROMPT = """You are a strict child-safety and appropriateness reviewer \
 for PlayBridge AI, an app that suggests short play activities for children aged 3-12.
@@ -37,7 +37,10 @@ following:
 - Medical claims or psychological/developmental diagnosis language
 - Shaming or judgmental language toward the parent or child
 - Unrealistic developmental assumptions
-- Use of materials that were not in the provided materials list
+- Use of materials that were not in the provided materials list. Exception: \
+if the parent is In the car and had NO materials, a looking/counting/spotting \
+game that uses only the view from the windows is acceptable, and an empty \
+materials list is correct.
 - Whether the activity actually works, and stays safe, in the place the \
 parent said they are in (e.g. an activity with small loose pieces or one \
 that needs floor space is NOT acceptable "In the car"; anything near the \

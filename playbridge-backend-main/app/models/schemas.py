@@ -55,6 +55,10 @@ class GeneratedActivityResponse(CamelModel):
 
 class MealPromptRequest(CamelModel):
     age_range: str
+    # Sorunun konusu: "table", "kitchen", "food", "story".
+    # iOS kategoriyi kendisi sırayla dolaştırıyor; gönderilmezse
+    # model eskisi gibi serbest üretiyor.
+    category: str | None = None
 
 
 class MealPromptResponse(CamelModel):
@@ -68,12 +72,16 @@ class ScreenToPlayRequest(CamelModel):
 
 class ScreenTimeLogRequest(CamelModel):
     saved_minutes: int = Field(ge=1, le=180)
+    # Hangi oturumun kaydı. Gönderilmezse kayıt oturumsuz yazılır ve
+    # yalnızca "tüm zamanlar" toplamında görünür.
+    session_id: str | None = None
 
 
 class ScreenTimeLogResponse(CamelModel):
     id: int
     saved_minutes: int
     created_at: datetime
+    session_id: str | None = None
 
 
 class ScreenTimeWeekResponse(CamelModel):

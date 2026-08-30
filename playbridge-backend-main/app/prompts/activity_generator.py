@@ -23,10 +23,10 @@ import uuid
 from google import genai
 from google.genai import types
 
-from app.config import GEMINI_API_KEY
+from app.config import GEMINI_API_KEY, GEMINI_MODEL
 from app.models.schemas import ActivityRequest, PlayActivity
 
-MODEL_NAME = "gemini-3.6-flash"
+MODEL_NAME = GEMINI_MODEL
 
 SYSTEM_PROMPT = """You are a creative assistant embedded in PlayBridge AI, an app \
 that helps parents turn short windows of time into simple, imaginative, \
