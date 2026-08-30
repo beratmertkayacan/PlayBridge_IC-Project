@@ -63,6 +63,12 @@ enum SketchPhotoStore {
         try? FileManager.default.removeItem(at: folderURL.appendingPathComponent(fileName))
     }
 
+    /// Klasörün tamamını siler. Kayıtla eşleşmeyen artık dosya kalmasın
+    /// diye oturum sonlandırmada bir kez daha süpürüyoruz.
+    static func deleteAll() {
+        try? FileManager.default.removeItem(at: folderURL)
+    }
+
     /// Defterin diskte kapladığı yer — ebeveyne gösterilebilsin diye.
     static func totalBytes() -> Int64 {
         guard let files = try? FileManager.default.contentsOfDirectory(

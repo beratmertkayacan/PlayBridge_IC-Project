@@ -62,6 +62,7 @@
 		AA2000000000000000000010 /* ScreenTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000010 /* ScreenTimeService.swift */; };
 		AA2000000000000000000011 /* ScreenTimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000011 /* ScreenTimeViewModel.swift */; };
 		AA2000000000000000000012 /* ScreenTimeSavedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000012 /* ScreenTimeSavedCard.swift */; };
+		AA2000000000000000000013 /* MinutesInputSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000013 /* MinutesInputSection.swift */; };
 		BB2000000000000000000001 /* DrawingChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1000000000000000000001 /* DrawingChallenge.swift */; };
 		BB2000000000000000000002 /* SketchEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1000000000000000000002 /* SketchEntry.swift */; };
 		BB2000000000000000000003 /* SketchBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1000000000000000000003 /* SketchBadge.swift */; };
@@ -76,6 +77,12 @@
 		BB200000000000000000000C /* BadgeMomentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB100000000000000000000C /* BadgeMomentView.swift */; };
 		BB200000000000000000000D /* SketchbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB100000000000000000000D /* SketchbookView.swift */; };
 		BB200000000000000000000E /* SketchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB100000000000000000000E /* SketchDetailView.swift */; };
+		BB2000000000000000000065 /* MealPromptCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1000000000000000000065 /* MealPromptCategory.swift */; };
+		BB2000000000000000000066 /* MealBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1000000000000000000066 /* MealBadge.swift */; };
+		BB2000000000000000000067 /* MealPromptLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1000000000000000000067 /* MealPromptLibrary.swift */; };
+		BB2000000000000000000068 /* MealStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1000000000000000000068 /* MealStore.swift */; };
+		BB20000000000000000000C9 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB10000000000000000000C9 /* SessionStore.swift */; };
+		BB20000000000000000000CA /* AppReset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB10000000000000000000CA /* AppReset.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +161,7 @@
 		AA1000000000000000000010 /* ScreenTimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTimeService.swift; sourceTree = "<group>"; };
 		AA1000000000000000000011 /* ScreenTimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTimeViewModel.swift; sourceTree = "<group>"; };
 		AA1000000000000000000012 /* ScreenTimeSavedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTimeSavedCard.swift; sourceTree = "<group>"; };
+		AA1000000000000000000013 /* MinutesInputSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinutesInputSection.swift; sourceTree = "<group>"; };
 		BB1000000000000000000001 /* DrawingChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingChallenge.swift; sourceTree = "<group>"; };
 		BB1000000000000000000002 /* SketchEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchEntry.swift; sourceTree = "<group>"; };
 		BB1000000000000000000003 /* SketchBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchBadge.swift; sourceTree = "<group>"; };
@@ -168,6 +176,12 @@
 		BB100000000000000000000C /* BadgeMomentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeMomentView.swift; sourceTree = "<group>"; };
 		BB100000000000000000000D /* SketchbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchbookView.swift; sourceTree = "<group>"; };
 		BB100000000000000000000E /* SketchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchDetailView.swift; sourceTree = "<group>"; };
+		BB1000000000000000000065 /* MealPromptCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPromptCategory.swift; sourceTree = "<group>"; };
+		BB1000000000000000000066 /* MealBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealBadge.swift; sourceTree = "<group>"; };
+		BB1000000000000000000067 /* MealPromptLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPromptLibrary.swift; sourceTree = "<group>"; };
+		BB1000000000000000000068 /* MealStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealStore.swift; sourceTree = "<group>"; };
+		BB10000000000000000000C9 /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
+		BB10000000000000000000CA /* AppReset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReset.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -245,6 +259,8 @@
 		ABE3A2D7304301AE00DA510F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BB1000000000000000000065 /* MealPromptCategory.swift */,
+				BB1000000000000000000066 /* MealBadge.swift */,
 				BB1000000000000000000001 /* DrawingChallenge.swift */,
 				BB1000000000000000000002 /* SketchEntry.swift */,
 				BB1000000000000000000003 /* SketchBadge.swift */,
@@ -380,6 +396,9 @@
 		ABE3A2E43043023500DA510F /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				BB10000000000000000000C9 /* SessionStore.swift */,
+				BB10000000000000000000CA /* AppReset.swift */,
+				BB1000000000000000000068 /* MealStore.swift */,
 				BB1000000000000000000005 /* SketchPhotoStore.swift */,
 				BB1000000000000000000006 /* SketchStore.swift */,
 				BB1000000000000000000007 /* ActiveChallengeStore.swift */,
@@ -396,6 +415,7 @@
 				BB1000000000000000000009 /* BadgeStamp.swift */,
 				BB100000000000000000000A /* DrawGameBanner.swift */,
 				AA1000000000000000000012 /* ScreenTimeSavedCard.swift */,
+				AA1000000000000000000013 /* MinutesInputSection.swift */,
 				AA100000000000000000000C /* RemovableChip.swift */,
 				AA100000000000000000000D /* MaterialsSection.swift */,
 				AA100000000000000000000E /* LocationSection.swift */,
@@ -446,6 +466,7 @@
 		BB1000000000000000000C00 /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				BB1000000000000000000067 /* MealPromptLibrary.swift */,
 				BB1000000000000000000004 /* ChallengeLibrary.swift */,
 			);
 			path = Content;
@@ -606,6 +627,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB20000000000000000000C9 /* SessionStore.swift in Sources */,
+				BB20000000000000000000CA /* AppReset.swift in Sources */,
+				BB2000000000000000000065 /* MealPromptCategory.swift in Sources */,
+				BB2000000000000000000066 /* MealBadge.swift in Sources */,
+				BB2000000000000000000067 /* MealPromptLibrary.swift in Sources */,
+				BB2000000000000000000068 /* MealStore.swift in Sources */,
 				BB2000000000000000000001 /* DrawingChallenge.swift in Sources */,
 				BB2000000000000000000002 /* SketchEntry.swift in Sources */,
 				BB2000000000000000000003 /* SketchBadge.swift in Sources */,
@@ -627,6 +654,7 @@
 				AA2000000000000000000010 /* ScreenTimeService.swift in Sources */,
 				AA2000000000000000000011 /* ScreenTimeViewModel.swift in Sources */,
 				AA2000000000000000000012 /* ScreenTimeSavedCard.swift in Sources */,
+				AA2000000000000000000013 /* MinutesInputSection.swift in Sources */,
 				AA2000000000000000000001 /* ActivityFeedback.swift in Sources */,
 				AA2000000000000000000002 /* PlayedActivity.swift in Sources */,
 				AA2000000000000000000003 /* PlayLibraryStore.swift in Sources */,

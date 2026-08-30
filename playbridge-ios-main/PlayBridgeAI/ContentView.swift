@@ -13,7 +13,8 @@ struct ContentView: View {
     var body: some View {
         if let profile = savedProfile {
             HomeDashboardView(childProfile: profile, onResetProfile: {
-                ProfileStore.clear()
+                // Sadece profili değil, oturumda biriken HER ŞEYİ siliyor.
+                AppReset.endSession()
                 savedProfile = nil
             })
         } else {

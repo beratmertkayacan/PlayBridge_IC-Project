@@ -9,6 +9,9 @@ import Foundation
 
 struct ScreenTimeLogRequest: Codable {
     var savedMinutes: Int
+    /// Hangi oturumun kaydı. Oturum sonlandırılınca yenisi üretiliyor,
+    /// böylece sunucudaki eski kayıtlar toplamlara girmiyor.
+    var sessionId: String?
 }
 
 struct ScreenTimeLogResponse: Codable {

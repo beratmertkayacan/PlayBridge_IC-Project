@@ -132,6 +132,21 @@ enum SketchStore {
         return newBadges
     }
 
+    /// Oturum sonlandırıldığında çağrılıyor.
+    ///
+    /// Kayıtlarla birlikte FOTOĞRAFLARI da siliyor — kayıt silinip
+    /// görüntü diskte kalırsa hem yer işgal eder hem de "her şey
+    /// silindi" sözünü tutmamış oluruz.
+    static func clearAll() {
+        for entry in allEntries() {
+            SketchPhotoStore.delete(entry.photoFileName)
+        }
+        UserDefaults.standard.removeObject(forKey: entriesKey)
+        UserDefaults.standard.removeObject(forKey: badgesKey)
+        UserDefaults.standard.removeObject(forKey: weekKey)
+        SketchPhotoStore.deleteAll()
+    }
+
     static func delete(_ entry: SketchEntry) {
         SketchPhotoStore.delete(entry.photoFileName)
         persistEntries(allEntries().filter { $0.id != entry.id })

@@ -15,7 +15,9 @@ enum ScreenTimeService {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.httpBody = try JSONEncoder().encode(ScreenTimeLogRequest(savedMinutes: savedMinutes))
+        urlRequest.httpBody = try JSONEncoder().encode(
+            ScreenTimeLogRequest(savedMinutes: savedMinutes, sessionId: SessionStore.current())
+        )
         urlRequest.timeoutInterval = 15
 
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
@@ -40,7 +42,19 @@ enum ScreenTimeService {
     }
 
     private static func fetchFromBackend() async throws -> Int {
-        let url = APIConfig.baseURL.appendingPathComponent("api/v1/screen-time/this-week")
+        var components = URLComponents(
+            url: APIConfig.baseURL.appendingPathComponent("api/v1/screen-time/this-week"),
+            resolvingAgainstBaseURL: false
+        )
+        // Oturum kimliği varsa yalnızca bu oturumun toplamı isteniyor.
+        // Sonlandırdıktan sonra yeni kimlikle sıfır dönüyor — sunucudaki
+        // eski kayıtlar duruyor ama artık bu oturuma ait değiller.
+        if let sessionId = SessionStore.current() {
+            components?.queryItems = [URLQueryItem(name: "sessionId", value: sessionId)]
+        }
+        guard let url = components?.url else {
+            throw NetworkError.invalidResponse
+        }
 
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
