@@ -38,6 +38,10 @@ following:
 - Shaming or judgmental language toward the parent or child
 - Unrealistic developmental assumptions
 - Use of materials that were not in the provided materials list
+- Whether the activity actually works, and stays safe, in the place the \
+parent said they are in (e.g. an activity with small loose pieces or one \
+that needs floor space is NOT acceptable "In the car"; anything near the \
+stove or knives is NOT acceptable "In the kitchen")
 - Privacy problems or unnecessary requests for sensitive personal data
 
 Be strict but fair — most simple activities using ordinary household items \
@@ -73,15 +77,23 @@ SAFETY_RESPONSE_SCHEMA = {
 }
 
 
-def _build_activity_text(activity: PlayActivity, age_range: str) -> str:
-    return (
-        f"Child age range: {age_range}\n"
-        f"Activity title: {activity.title}\n"
-        f"Materials: {', '.join(activity.materials)}\n"
-        f"Setup steps: {'; '.join(activity.setup_steps)}\n"
-        f"Child instructions: {'; '.join(activity.child_instructions)}\n"
-        f"Imagination prompts: {'; '.join(activity.imagination_prompts)}"
-    )
+def _build_activity_text(
+    activity: PlayActivity, age_range: str, location: str | None = None
+) -> str:
+    lines = [f"Child age range: {age_range}"]
+    # Mekan, güvenlik değerlendirmesini doğrudan değiştiriyor: oturma
+    # odasında masum olan bir oyun arabada tehlikeli olabilir. Bu yüzden
+    # reviewer'a da söylüyoruz.
+    if location:
+        lines.append(f"Parent is currently: {location}")
+    lines += [
+        f"Activity title: {activity.title}",
+        f"Materials: {', '.join(activity.materials)}",
+        f"Setup steps: {'; '.join(activity.setup_steps)}",
+        f"Child instructions: {'; '.join(activity.child_instructions)}",
+        f"Imagination prompts: {'; '.join(activity.imagination_prompts)}",
+    ]
+    return "\n".join(lines)
 
 
 def _get_client() -> genai.Client:
@@ -94,12 +106,14 @@ def _get_client() -> genai.Client:
     return genai.Client(api_key=GEMINI_API_KEY)
 
 
-async def review_activity(activity: PlayActivity, age_range: str) -> dict:
+async def review_activity(
+    activity: PlayActivity, age_range: str, location: str | None = None
+) -> dict:
     client = _get_client()
 
     response = await client.aio.models.generate_content(
         model=MODEL_NAME,
-        contents=_build_activity_text(activity, age_range),
+        contents=_build_activity_text(activity, age_range, location),
         config=types.GenerateContentConfig(
             system_instruction=SAFETY_SYSTEM_PROMPT,
             response_mime_type="application/json",

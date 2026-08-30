@@ -71,7 +71,7 @@ async def _generate(request: ActivityRequest, extra_guidance: str | None = None)
 async def generate_activity_endpoint(request: ActivityRequest) -> GeneratedActivityResponse:
     try:
         activity = await _generate(request)
-        review = await review_activity(activity, request.age_range)
+        review = await review_activity(activity, request.age_range, request.location)
 
         if review.get("rewriteRequired"):
             logger.info(
@@ -79,7 +79,7 @@ async def generate_activity_endpoint(request: ActivityRequest) -> GeneratedActiv
             )
             feedback = "; ".join(review.get("issues", [])) or "unspecified concern"
             activity = await _generate(request, extra_guidance=feedback)
-            review = await review_activity(activity, request.age_range)
+            review = await review_activity(activity, request.age_range, request.location)
 
         if review.get("rewriteRequired") or not review.get("safe", True):
             logger.warning(

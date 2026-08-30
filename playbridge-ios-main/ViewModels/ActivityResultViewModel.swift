@@ -10,8 +10,9 @@ import Foundation
 /// Sonuç ekranının durumu.
 ///
 /// İki yeni davranışın sahibi:
-/// 1. "Try a different idea" — aynı girdiyle yeni bir aktivite üretir,
-///    ekranı yerinde değiştirir. Yeni bir ekrana GİTMİYORUZ: ebeveyn
+/// 1. "Suggest another one" — aynı girdiyle (süre, mekan, malzemeler)
+///    yeni bir aktivite üretir, ekranı yerinde değiştirir. Yeni bir
+///    ekrana GİTMİYORUZ: ebeveyn
 ///    geri tuşuyla eski önerilere dönmek istemez, tek bir öneri görmek
 ///    ister. Atılan öneri hiçbir yere kaydedilmez.
 /// 2. "Put the phone down & play" — aktiviteyi kütüphaneye "oynandı"

@@ -55,6 +55,9 @@
 		AA2000000000000000000009 /* FeedbackPromptCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000009 /* FeedbackPromptCard.swift */; };
 		AA200000000000000000000A /* PlayLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000000A /* PlayLibraryView.swift */; };
 		AA200000000000000000000B /* PlayedActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000000B /* PlayedActivityDetailView.swift */; };
+		AA200000000000000000000C /* RemovableChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000000C /* RemovableChip.swift */; };
+		AA200000000000000000000D /* MaterialsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000000D /* MaterialsSection.swift */; };
+		AA200000000000000000000E /* LocationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000000E /* LocationSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +129,9 @@
 		AA1000000000000000000009 /* FeedbackPromptCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPromptCard.swift; sourceTree = "<group>"; };
 		AA100000000000000000000A /* PlayLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayLibraryView.swift; sourceTree = "<group>"; };
 		AA100000000000000000000B /* PlayedActivityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayedActivityDetailView.swift; sourceTree = "<group>"; };
+		AA100000000000000000000C /* RemovableChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovableChip.swift; sourceTree = "<group>"; };
+		AA100000000000000000000D /* MaterialsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialsSection.swift; sourceTree = "<group>"; };
+		AA100000000000000000000E /* LocationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -339,6 +345,9 @@
 		ABE3A2E53043024000DA510F /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				AA100000000000000000000C /* RemovableChip.swift */,
+				AA100000000000000000000D /* MaterialsSection.swift */,
+				AA100000000000000000000E /* LocationSection.swift */,
 				AA1000000000000000000007 /* FeedbackOptionsView.swift */,
 				AA1000000000000000000008 /* ActivityBodyView.swift */,
 				ABE3A32C3043551D00DA510F /* FlowLayout.swift */,
@@ -527,6 +536,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA200000000000000000000C /* RemovableChip.swift in Sources */,
+				AA200000000000000000000D /* MaterialsSection.swift in Sources */,
+				AA200000000000000000000E /* LocationSection.swift in Sources */,
 				AA2000000000000000000001 /* ActivityFeedback.swift in Sources */,
 				AA2000000000000000000002 /* PlayedActivity.swift in Sources */,
 				AA2000000000000000000003 /* PlayLibraryStore.swift in Sources */,

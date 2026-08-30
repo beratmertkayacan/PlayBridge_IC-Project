@@ -11,7 +11,6 @@ struct NeedMinutesInputView: View {
     @State private var viewModel: ActivityGeneratorViewModel
     @Binding var path: NavigationPath
 
-    private let materialOptions = ["Paper", "Crayons", "Building Blocks", "Toy Animals", "Books", "Pillows", "Ball"]
 
     init(childProfile: ChildProfile, path: Binding<NavigationPath>) {
         _viewModel = State(initialValue: ActivityGeneratorViewModel(childProfile: childProfile))
@@ -35,7 +34,8 @@ struct NeedMinutesInputView: View {
 
                     durationSection
                     setupTimeSection
-                    materialsSection
+                    LocationSection(viewModel: viewModel)
+                    MaterialsSection(viewModel: viewModel)
 
                     PrimaryButton(
                         title: viewModel.isGenerating ? "Generating..." : "Generate Activity",
@@ -103,21 +103,4 @@ struct NeedMinutesInputView: View {
         }
     }
 
-    private var materialsSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("What do you have available right now?")
-                .font(.headline)
-                .foregroundStyle(Theme.textPrimary)
-            FlowLayout(spacing: 10) {
-                ForEach(materialOptions, id: \.self) { material in
-                    SelectableChip(
-                        title: material,
-                        isSelected: viewModel.selectedMaterials.contains(material)
-                    ) {
-                        viewModel.toggleMaterial(material)
-                    }
-                }
-            }
-        }
-    }
 }

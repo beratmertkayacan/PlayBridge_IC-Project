@@ -47,18 +47,49 @@ Ya da tarayıcıdan http://127.0.0.1:8000/docs adresine gidip
 
 ```
 app/
-  main.py                     FastAPI giriş noktası + health check
-  config.py                   .env'den GEMINI_API_KEY okur
+  main.py                       FastAPI giriş noktası + health check
+  config.py                     .env'den GEMINI_API_KEY okur
   models/
-    schemas.py                 Pydantic modelleri (Swift Codable'larla birebir eşleşir)
+    schemas.py                  Pydantic modelleri (Swift Codable'larla birebir eşleşir)
   routers/
-    activity.py                 /api/v1/activity/generate (Gemini + mock fallback)
+    activity.py                 /api/v1/activity/generate   (independent + together)
+    screen_to_play.py           /api/v1/screen-to-play/generate
+    meal.py                     /api/v1/meal/prompt
     ai_diagnostics.py           /api/v1/ai/ping (bağlantı testi)
   services/
-    ai_client.py                 Gemini istemcisi (ping için)
+    ai_client.py                Gemini istemcisi (ping için)
   prompts/
-    activity_generator.py       Asıl Activity Generator prompt'u
+    activity_generator.py       Bağımsız oyun üretici (Phase 10)
+    together_generator.py       Ebeveyn-çocuk birlikte oyun üretici
+    screen_to_play_generator.py Ekran konusunu oyuna çeviren üretici
+    meal_prompt_generator.py    Tek cümlelik sohbet başlatıcı
+    safety_reviewer.py          Child Safety Reviewer (Phase 11)
 ```
+
+**Akış:** her üretim isteği aynı iki aşamadan geçer — önce moda uygun
+generator, sonra `safety_reviewer`. Reviewer düzeltme isterse bir kez
+yeniden üretilir; ikinci denemede de geçemezse elle yazılmış güvenli
+mock'a düşülür. Hiçbir durumda kullanıcı hata ekranı görmez.
+
+## Mekan (location) alanı
+
+`ActivityRequest` içinde opsiyonel bir `location` alanı var:
+`"Living room"`, `"In the kitchen"`, `"In the car"`, `"Outdoor"`.
+iOS'ta seçilmesi zorunlu değil; gönderilmezse alan hiç eklenmez ve
+üretim eskisi gibi çalışır.
+
+Gönderildiğinde iki yeri birden etkiliyor:
+
+1. **Üretim** — `activity_generator` ve `together_generator` sistem
+   promptlarında mekana özel kısıtlar var. Arabada: kemer takılıyken
+   koltuktan yapılabilmeli, yuvarlanıp kaçan ya da ayak boşluğuna düşen
+   küçük parça olmamalı, sürücünün dikkatini dağıtmamalı. Mutfakta:
+   ocak, sıcak yüzey ve bıçaklardan uzak.
+2. **Güvenlik incelemesi** — `safety_reviewer` da mekanı görüyor.
+   Oturma odasında masum olan bir oyun arabada tehlikeli olabilir; bu
+   yüzden inceleme kriterlerine "bu aktivite söylenen yerde gerçekten
+   yapılabilir ve güvenli mi?" maddesi eklendi.
+
 
 ## JSON alan isimleri neden camelCase?
 
@@ -160,7 +191,12 @@ güvenlik onaylı aktivite üretildi: ...` satırını görmelisiniz
 
 ## Sırada ne var?
 
-- **Phase 12:** iOS tarafındaki `ActivityService.swift`, yerel mock
-  yerine bu backend'e `URLSession` ile gerçek istek atacak — böylece
-  uygulama uçtan uca (Xcode'dan bu backend'e, oradan Gemini'ye)
-  gerçekten bağlanmış olacak.
+- **Play Library & geri bildirim (iOS):** oynanan aktiviteler cihazda
+  saklanıyor, ebeveyn sonraki açılışta 5 seçenekli tek dokunuşluk geri
+  bildirim veriyor. Veri şimdilik cihazda kalıyor — backend'e gitmiyor.
+- **Sıradaki adım:** bu geri bildirimleri üretim promptuna taşıyıp
+  "öğrenen çocuk profili" oluşturmak. `ActivityFeedback.learningNote`
+  alanları bu iş için bugünden yazıldı.
+- **Dağıtım:** backend hâlâ yalnızca yerelde çalışıyor; iOS
+  `APIConfig.baseURL` localhost'a bakıyor. Gerçek kullanıcıya ulaşmak
+  için sunucunun bir yere deploy edilmesi gerekiyor.
