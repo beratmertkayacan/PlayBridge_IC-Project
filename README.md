@@ -1,5 +1,3 @@
-
-
 # PlayBridge AI
 
 Ekran süresini azaltmak için ebeveyne ekrana alternatif bir platform sunan iOS uygulaması. Çocuğun yaşına, ilgi alanlarına, evdeki malzemelere ve bulunduğu mekana göre saniyeler içinde güvenli bir oyun fikri üretiyor.
@@ -7,8 +5,6 @@ Ekran süresini azaltmak için ebeveyne ekrana alternatif bir platform sunan iOS
 Samsung Innovation Campus Hackathon 2026, ekran bağımlılığı teması.
 
 [Demo videosunu izle](https://www.youtube.com/watch?v=BcjpoSNYbRY)
-
-
 
 ---
 
@@ -42,10 +38,6 @@ Uygulamanın ölçtüğü tek şey ekrandan kurtarılan süre. Ebeveyn bir aktiv
 
 
 ## Ekranlar
-
-Uygulamanın çalışırken görünümü için [demo videosuna](https://www.youtube.com/watch?v=BcjpoSNYbRY) bakabilirsiniz.
-
-
 
 
 | Karşılama                       | İlgi Alanları                     | Malzemeler                        |
@@ -141,8 +133,6 @@ Yerel depolama (profil, geçmiş)       /api/v1/meal/prompt                 Goog
 2. Çıktı Child Safety Reviewer'a gidiyor. Yaş uygunluğu, tehlikeli ya da boğulma riski taşıyan nesneler, ateş, elektrik ve kimyasal riskler, güvenli olmayan tırmanma, tıbbi ya da klinik dil, utandırıcı ifadeler, verilmeyen malzemenin kullanılması, mekana uygunluk ve gizlilik kontrol ediliyor.
 3. Reviewer yeniden yazım isterse geri bildirimle bir kez daha üretiliyor. İkinci denemede de geçemezse elle yazılmış güvenli bir aktiviteye düşülüyor.
 4. İstemciye giden `SafetyReview` modeli bilerek sade tutuldu (`reviewed`, `safe`, `notes`). Ayrıntılı karar mantığı (`issues`, `severity`, `rewriteRequired`) backend'de kalıyor.
-
-
 
 ---
 
