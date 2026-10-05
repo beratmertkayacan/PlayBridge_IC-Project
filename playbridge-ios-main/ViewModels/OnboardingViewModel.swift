@@ -101,7 +101,7 @@ final class OnboardingViewModel {
 
     // Yaş 12'ye kadar açık. Çizim oyunu ilkokul sonuna kadar taşıyor;
     // kademeler yukarı çıktıkça görevler kısıt içeren zorluklara dönüşüyor.
-    let ageRanges = ["3-4", "5-6", "7-8", "9-10", "11-12"]
+    let ageRanges = ["5-6", "7-8", "9-10", "11-12"]
 
     var presetInterestOptions: [String] {
         InterestCategory.allCases.flatMap(\.options)
